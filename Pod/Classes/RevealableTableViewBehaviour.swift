@@ -150,7 +150,9 @@ extension RevealableTableViewBehaviour: UIGestureRecognizerDelegate {
         let transformView = config.style == .slide
             ? cell.contentView
             : revealableView
-
+        if config.style == .slide {
+            revealableView.transform = transform ?? CGAffineTransform(translationX: x, y: 0)
+        }
         transformView.transform = transform ?? CGAffineTransform(translationX: x, y: 0)
     }
 
