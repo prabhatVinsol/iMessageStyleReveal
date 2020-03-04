@@ -137,7 +137,7 @@ extension RevealableTableViewBehaviour: UIGestureRecognizerDelegate {
     }
 
     fileprivate func updateTransform(transform: CGAffineTransform?, cell: UITableViewCell, config: RevealableViewConfiguration, revealableView: RevealableView, indexPath: IndexPath) {
-        var x = currentOffset
+        var x = 0 - currentOffset
 
         if position == .trailing {
             x = max(x, -revealableView.bounds.width)
