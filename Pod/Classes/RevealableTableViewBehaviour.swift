@@ -9,6 +9,7 @@ public final class RevealableTableViewBehaviour: NSObject {
 
     private let reuseQueues = RevealableViewsReuseQueues()
     public let position: RevealPosition
+    public let isTableInverted: Bool
     private var cachedConfigs: [IndexPath: RevealableViewConfiguration] = [:]
 
     private var translationX: CGFloat = 0
@@ -19,8 +20,9 @@ public final class RevealableTableViewBehaviour: NSObject {
         return gesture
     }()
 
-    public init(position: RevealPosition, tableView: UITableView) {
+    public init(position: RevealPosition, tableView: UITableView, isTableInverted: Bool) {
         self.position = position
+        self.isTableInverted = isTableInverted
         super.init()
 
         delegateObserver = tableView.observe(\.delegate, options: [.initial, .new]) { [weak self] tableView, _ in
@@ -137,7 +139,7 @@ extension RevealableTableViewBehaviour: UIGestureRecognizerDelegate {
     }
 
     fileprivate func updateTransform(transform: CGAffineTransform?, cell: UITableViewCell, config: RevealableViewConfiguration, revealableView: RevealableView, indexPath: IndexPath) {
-        var x = 0 - currentOffset
+        var x = isTableInverted ? 0 - currentOffset : currentOffset
 
         if position == .trailing {
             x = max(x, -revealableView.bounds.width)

@@ -19,7 +19,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        behaviour = RevealableTableViewBehaviour(position: .trailing, tableView: tableView)
+        behaviour = RevealableTableViewBehaviour(position: .trailing, tableView: tableView, isTableInverted: true)
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
