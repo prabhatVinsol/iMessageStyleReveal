@@ -155,7 +155,12 @@ extension RevealableTableViewBehaviour: UIGestureRecognizerDelegate {
         if config.style == .slide {
             revealableView.transform = transform ?? CGAffineTransform(translationX: x, y: 0)
         }
-        transformView.subviews[0].transform = transform ?? CGAffineTransform(translationX: x, y: 0)
+        if #available(iOS 14.0, *) {
+            transformView.subviews[0].transform = transform ?? CGAffineTransform(translationX: x, y: 0)
+        } else {
+            transformView.transform = transform ?? CGAffineTransform(translationX: x, y: 0)
+        }
+        
     }
 
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
